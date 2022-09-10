@@ -1,0 +1,20 @@
+[
+  {
+    "name": "get",
+    "path": "/get",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\get.vue",
+    "chunkName": "pages/get"
+  },
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

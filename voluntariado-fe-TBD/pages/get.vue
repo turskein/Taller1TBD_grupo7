@@ -1,9 +1,80 @@
 <template>
-    
+    <v-simple-table>
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">
+            Id
+          </th>
+          <th class="text-left">
+            Names
+          </th>
+          <th class="text-left">
+            
+          </th>
+          <th class="text-left">
+            
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="insti in institutions"
+          :key="insti.id_institution"
+          v-bind:id="'institution_'+insti.id_institution"
+        >
+          <td>{{ insti.id_institution }}</td>
+          <td>{{ insti.institution }}</td>
+          <td>
+            <v-btn
+                depressed
+                color="primary"
+                >
+                Edit
+            </v-btn>
+          </td>
+          <td>
+            <v-btn
+                depressed
+                color="error"
+                @click="deleteFunction(insti.id_institution)" >
+                Delete
+            </v-btn>
+
+          </td>
+          
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-    name : GetAllPage
+    name : 'GetAllPage',
+    data: () => ({
+        institutions: []
+    }),
+    methods: {
+        deleteFunction(id){
+            axios.delete("http://localhost:8081/institutions/"+id)
+            .then(response => {
+                console.log(response)
+                const element = document.getElementById("institution_"+id);
+                element.remove();
+            })
+        }
+    }, 
+    beforeCreate(){
+        axios.get("http://localhost:8081/institutions")
+        .then(response => {
+            this.institutions = response.data;
+        }
+        );
+
+        
+    },
+    
 }
 </script>

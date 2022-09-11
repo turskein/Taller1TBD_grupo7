@@ -4,9 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _632a810a = () => interopDefault(import('..\\pages\\get.vue' /* webpackChunkName: "pages/get" */))
-const _17fd948e = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _2174e586 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _b90fb770 = () => interopDefault(import('..\\pages\\get.vue' /* webpackChunkName: "pages/get" */))
+const _662b68cc = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _ca4478fe = () => interopDefault(import('..\\pages\\put.vue' /* webpackChunkName: "pages/put" */))
+const _f6329d78 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -21,15 +22,19 @@ export const routerOptions = {
 
   routes: [{
     path: "/get",
-    component: _632a810a,
+    component: _b90fb770,
     name: "get"
   }, {
     path: "/inspire",
-    component: _17fd948e,
+    component: _662b68cc,
     name: "inspire"
   }, {
+    path: "/put",
+    component: _ca4478fe,
+    name: "put"
+  }, {
     path: "/",
-    component: _2174e586,
+    component: _f6329d78,
     name: "index"
   }],
 

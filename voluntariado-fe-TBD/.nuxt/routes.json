@@ -2,19 +2,29 @@
   {
     "name": "get",
     "path": "/get",
-    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\get.vue",
-    "chunkName": "pages/get"
+    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\get.vue",
+    "chunkName": "pages/get",
+    "_name": "_b90fb770"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire"
+    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_662b68cc"
+  },
+  {
+    "name": "put",
+    "path": "/put",
+    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\put.vue",
+    "chunkName": "pages/put",
+    "_name": "_ca4478fe"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_f6329d78"
   }
 ]

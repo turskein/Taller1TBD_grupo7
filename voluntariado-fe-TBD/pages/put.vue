@@ -7,7 +7,7 @@
   
           <v-text-field
         v-model="name"
-        :counter="10"
+        :counter="25"
         label="Institucion"
         required
        ></v-text-field>

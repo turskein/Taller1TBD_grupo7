@@ -32,11 +32,6 @@
               :to="{ path: 'put', query: {id: insti.id_institution}}" >
               Edit
             </v-btn>
-
-            
-
-            
-
           </td>
           <td>
             <v-btn
@@ -45,9 +40,7 @@
                 @click="deleteFunction(insti.id_institution)" >
                 Delete
             </v-btn>
-
           </td>
-          
         </tr>
       </tbody>
     </template>
@@ -77,10 +70,7 @@ export default {
         .then(response => {
             this.institutions = response.data;
         }
-        );
-
-        
+      );
     },
-    
 }
 </script>

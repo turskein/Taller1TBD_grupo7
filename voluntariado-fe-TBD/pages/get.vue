@@ -27,11 +27,16 @@
           <td>{{ insti.institution }}</td>
           <td>
             <v-btn
-                depressed
-                color="primary"
-                >
-                Edit
+            depressed
+            color="primary"
+              :to="{ path: 'put', query: {id: insti.id_institution}}" >
+              Edit
             </v-btn>
+
+            
+
+            
+
           </td>
           <td>
             <v-btn
@@ -64,8 +69,9 @@ export default {
                 const element = document.getElementById("institution_"+id);
                 element.remove();
             })
-        }
+        },
     }, 
+    
     beforeCreate(){
         axios.get("http://localhost:8081/institutions")
         .then(response => {

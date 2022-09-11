@@ -32,13 +32,13 @@ public class InstitutionService {
 
     @PostMapping()
     @ResponseBody
-    public Institution getById(@RequestBody Institution institution){
+    public Institution postById(@RequestBody Institution institution){
         return this.institutionRepository.post(institution);
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    public Institution getBydId(@RequestBody Institution institution, @PathVariable("id") int id) {
+    public Institution putById(@PathVariable("id") int id, @RequestBody Institution institution ) {
         return this.institutionRepository.put(id, institution);
     }
 

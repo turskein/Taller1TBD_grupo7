@@ -32,7 +32,7 @@ public class InstitutionService {
 
     @PostMapping()
     @ResponseBody
-    public Institution postById(@RequestBody Institution institution){
+    public Institution postById(@RequestBody Institution institution) {
         return this.institutionRepository.post(institution);
     }
 

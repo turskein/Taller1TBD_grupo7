@@ -22,9 +22,12 @@ public class TaskService {
         return taskRepository.getTasksByIdVolunteer(id_volunteer);
     }
 
+    @GetMapping("/{id}")
+
     @PutMapping("/{idtask}")
     @ResponseBody
     public int putNewStatus(@PathVariable("idtask") int idtask, @RequestParam String newStatus){
         return taskRepository.updateTaskById(idtask, newStatus);
     }
+
 }

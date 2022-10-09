@@ -18,6 +18,10 @@ public class VoluntarioService {
         this.voluntarioRepository = voluntarioRepository;
     }
 
+    @GetMapping("/name/{name}")
+    public Voluntario getById(@PathVariable("name") String name){
+        return voluntarioRepository.getByName(name);
+    }
     @GetMapping("/{id}")
     public Voluntario getById(@PathVariable("id") int id){
         return voluntarioRepository.getById(id);

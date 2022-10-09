@@ -24,10 +24,16 @@ public class TareaService {
         return taskRepository.getTareasByIdVoluntario(id_volunteer);
     }
 
-    @PatchMapping("/{idtask}")
+    @PatchMapping("/aceptar/{idtask}")
     @ResponseBody
-    public int putNewStatus(@PathVariable("idtask") int idtask, @RequestParam() String newStatus){
-        return taskRepository.updateTareaById(idtask, newStatus);
+    public int acceptTareaById(@PathVariable("idtask") int idtask){
+        return taskRepository.acceptTareaById(idtask);
+    }
+
+    @PatchMapping("/rechazar/{idtask}")
+    @ResponseBody
+    public int rejectTareaById(@PathVariable("idtask") int idtask){
+        return taskRepository.rejectTareaById(idtask);
     }
 
     @GetMapping()

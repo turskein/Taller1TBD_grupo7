@@ -1,5 +1,6 @@
 package cl.tbd.voluntariadobetbd.repositories.TareaRepository;
 
+import cl.tbd.voluntariadobetbd.models.Estado_tarea;
 import cl.tbd.voluntariadobetbd.models.Voluntario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.sql2o.Connection;
@@ -65,13 +66,32 @@ public class TareaRepositoryImp implements TareaRepository {
     }
 
     @Override
-    public int updateTareaById(int idTarea, String newStatus){
-        String query = "UPDATE estado_tarea SET estado_tarea.descrip = :new_status WHERE estado_tarea.id_task = :id";
+    public int acceptTareaById(int idTarea){
+        String getIdacceptQuery = "SELECT estado_tarea.id, estado_tarea.descrip FROM estado_tarea WHERE estado_tarea.descrip = 'aceptado'";
+        String queryUpdate = "UPDATE tarea SET id_estado = :id_estado WHERE id = :id";
         try(Connection conn = sql2o.open()){
-            conn.createQuery(query,true)
-            .addParameter("new_status", newStatus)
+            int idRejected = conn.createQuery(getIdacceptQuery).executeAndFetchFirst(Estado_tarea.class).getId();
+            conn.createQuery(queryUpdate,true)
+                    .addParameter("id", idTarea)
+                    .addParameter("id_estado",idRejected)
+                    .executeUpdate();
+            return 1;
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int rejectTareaById(int idTarea){
+        String getIdrejectQuery = "SELECT estado_tarea.id, estado_tarea.descrip FROM estado_tarea WHERE estado_tarea.descrip = 'rechazado'";
+        String queryUpdate = "UPDATE tarea SET id_estado = :id_estado WHERE id = :id";
+        try(Connection conn = sql2o.open()){
+            int idRejected = conn.createQuery(getIdrejectQuery).executeAndFetchFirst(Estado_tarea.class).getId();
+            conn.createQuery(queryUpdate,true)
             .addParameter("id", idTarea)
-            .executeScalar();
+            .addParameter("id_estado",idRejected)
+            .executeUpdate();
             return 1;
         }catch(Exception e){
             System.out.print(e.getMessage());
@@ -111,7 +131,7 @@ public class TareaRepositoryImp implements TareaRepository {
                                         "cant_vol_inscritos," +
                                         "id_emergencia," +
                                         "finicio," +
-                                        "ffin)" +
+                                        "ffin,id_estado)" +
                                         "VALUES" +
                                         "(:nombre," +
                                         ":descrip, " +
@@ -119,7 +139,8 @@ public class TareaRepositoryImp implements TareaRepository {
                                         ":cant_vol_inscritos," +
                                         ":id_emergencia," +
                                         ":finicio," +
-                                        ":ffin)";
+                                        ":ffin," +
+                                        ":id_estado) ";
         try(Connection conn = sql2o.open()){
             int newId=(int)conn.createQuery(query,true)
                     .addParameter("nombre", newTarea.getNombre())
@@ -129,6 +150,7 @@ public class TareaRepositoryImp implements TareaRepository {
                     .addParameter("id_emergencia_numeric", newTarea.getId_emergencia())
                     .addParameter("finicio", newTarea.getFinicio())
                     .addParameter("ffin", newTarea.getFfin())
+                    .addParameter("id_estado",newTarea.getId_estado())
                     .executeUpdate()
                     .getKey();
             newTarea.setId(newId);
@@ -141,8 +163,8 @@ public class TareaRepositoryImp implements TareaRepository {
 
     @Override
     public Tarea put(int id, Tarea newTarea){
-        final String query = "UPDATE Ranking SET nombre = :nombre, descrip = :descrip, cant_vol_requeridos= :cant_vol_requeridos" +
-                "cant_vol_inscritos=:cant_vol_inscritos,id_emergencia=:id_emergencia, finicio=:finicio, ffin=:ffin WHERE Ranking.id = :id";
+        final String query = "UPDATE tarea SET nombre = :nombre, descrip = :descrip, cant_vol_requeridos= :cant_vol_requeridos" +
+                "cant_vol_inscritos=:cant_vol_inscritos,id_emergencia=:id_emergencia, finicio=:finicio, ffin=:ffin, id_estado=:id_estado WHERE tarea.id = :id";
         try(Connection conn = sql2o.open()){
             conn.createQuery(query,true)
                     .addParameter("nombre", newTarea.getNombre())
@@ -153,6 +175,7 @@ public class TareaRepositoryImp implements TareaRepository {
                     .addParameter("finicio", newTarea.getFinicio())
                     .addParameter("ffin", newTarea.getFfin())
                     .addParameter(":id",id)
+                    .addParameter("id_estado",newTarea.getId_estado())
                     .executeUpdate()
                     .getKey();
             return newTarea;

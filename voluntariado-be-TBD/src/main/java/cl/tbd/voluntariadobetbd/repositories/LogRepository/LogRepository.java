@@ -1,6 +1,7 @@
 package cl.tbd.voluntariadobetbd.repositories.LogRepository;
 
 import java.util.List;
+import java.sql.Date;
 import cl.tbd.voluntariadobetbd.models.Log;
 
 public interface LogRepository {

@@ -1,4 +1,5 @@
 package cl.tbd.voluntariadobetbd.models;
+import java.sql.Date;
 
 public class Emergencia {
     private Integer id;

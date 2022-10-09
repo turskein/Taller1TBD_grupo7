@@ -1,6 +1,7 @@
 package cl.tbd.voluntariadobetbd.repositories.EmergenciaRepository;
 
 import java.util.List;
+import java.sql.Date;
 import cl.tbd.voluntariadobetbd.models.Emergencia;
 
 public interface EmergenciaRepository {

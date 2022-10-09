@@ -51,7 +51,7 @@ public class RankingRepositoryImp implements RankingRepository{
                     .addParameter("RankingFlg_participa", Ranking.getFlg_participa())
                     .executeUpdate()
                     .getKey();
-            Ranking.setId_Ranking(insertId);
+            Ranking.setId(insertId);
             return Ranking;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -74,7 +74,7 @@ public class RankingRepositoryImp implements RankingRepository{
                     .addParameter("id",id)
                     .executeUpdate()
                     .getKey();
-            Ranking.setId_Ranking(insertId);
+            Ranking.setId(insertId);
             return Ranking;
 
         }catch(Exception e){
@@ -108,14 +108,14 @@ public class RankingRepositoryImp implements RankingRepository{
     public int deleteById(int id){
         try(Connection conn = sql2o.open()){
             //nombre de la tabla con el nombre del id como esta puesto en la tabla
-            int result = conn.createQuery("DELETE FROM ranking WHERE id = :id")
+            conn.createQuery("DELETE FROM ranking WHERE id = :id")
                     .addParameter("id",id)
                     .executeUpdate()
                     .getResult();
-            return result;
+            return 1;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return -1;
+            return 0;
         }
     };
 }

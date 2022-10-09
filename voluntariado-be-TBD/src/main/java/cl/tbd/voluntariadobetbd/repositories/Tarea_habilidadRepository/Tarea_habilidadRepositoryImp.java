@@ -48,7 +48,7 @@ public class Tarea_habilidadRepositoryImp implements Tarea_habilidadRepository{
                     .addParameter("Tarea_habilidadId_tarea", Tarea_habilidad.getId_tarea())
                     .executeUpdate()
                     .getKey();
-            Tarea_habilidad.setId_Tarea_habilidad(insertId);
+            Tarea_habilidad.setId(insertId);
             return Tarea_habilidad;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -68,7 +68,7 @@ public class Tarea_habilidadRepositoryImp implements Tarea_habilidadRepository{
                     .addParameter("id",id)
                     .executeUpdate()
                     .getKey();
-            Tarea_habilidad.setId_Tarea_habilidad(insertId);
+            Tarea_habilidad.setId(insertId);
             return Tarea_habilidad;
 
         }catch(Exception e){

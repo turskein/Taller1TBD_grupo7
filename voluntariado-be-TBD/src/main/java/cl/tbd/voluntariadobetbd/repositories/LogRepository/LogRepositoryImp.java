@@ -50,7 +50,7 @@ public class LogRepositoryImp implements LogRepository{
                     .addParameter("LogFecha", Log.getFecha())
                     .executeUpdate()
                     .getKey();
-            Log.setId_Log(insertId);
+            Log.setId(insertId);
             return Log;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -72,7 +72,7 @@ public class LogRepositoryImp implements LogRepository{
                     .addParameter("id",id)
                     .executeUpdate()
                     .getKey();
-            Log.setId_Log(insertId);
+            Log.setId(insertId);
             return Log;
 
         }catch(Exception e){

@@ -28,11 +28,6 @@ public class RankingService {
         return this.rankingRepository.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Ranking getById(@PathVariable("id") int id){
-        return this.rankingRepository.getById(id);
-    }
-
 
     @PostMapping()
     @ResponseBody
@@ -70,11 +65,7 @@ public class RankingService {
             response.put("response", "the ranking with id_ranking equal to "
                     + Integer.toString(id)
                     + " was deleted");
-        } else if (code == 0) {
-            response.put("status", "409");
-            response.put("error", "there arent a rankings with id_ranking equal to "
-                    + Integer.toString(id));
-        } else{
+        }else{
             response.put("status", "400");
             response.put("response", "something went wrong");
         }

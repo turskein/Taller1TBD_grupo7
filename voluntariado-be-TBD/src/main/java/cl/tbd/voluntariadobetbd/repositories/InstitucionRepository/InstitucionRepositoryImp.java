@@ -1,6 +1,6 @@
-package cl.tbd.voluntariadobetbd.repositories.InstitutionRepository;
+package cl.tbd.voluntariadobetbd.repositories.InstitucionRepository;
 
-import cl.tbd.voluntariadobetbd.models.Institution;
+import cl.tbd.voluntariadobetbd.models.Institucion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
@@ -9,15 +9,16 @@ import org.sql2o.Sql2o;
 import java.util.List;
 
 @Repository
-public class InstitutionRepositoryImp implements InstitutionRepository{
+public class InstitucionRepositoryImp implements InstitucionRepository {
 
     @Autowired
     private Sql2o sql2o;
 
     @Override
-    public List<Institution> getAll(){
+    public List<Institucion> getAll(){
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM institution").executeAndFetch(Institution.class);
+            return conn.createQuery("SELECT * FROM institucion")
+                    .executeAndFetch(Institucion.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -25,11 +26,11 @@ public class InstitutionRepositoryImp implements InstitutionRepository{
     }
 
     @Override
-    public Institution getById(int id){
+    public Institucion getById(int id){
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM institution WHERE institution.id_institution = :id")
+            return conn.createQuery("SELECT * FROM institucion WHERE institucion.id = :id")
                     .addParameter("id",id)
-                    .executeAndFetchFirst(Institution.class);
+                    .executeAndFetchFirst(Institucion.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -38,34 +39,35 @@ public class InstitutionRepositoryImp implements InstitutionRepository{
 
 
     @Override
-    public Institution post(Institution institution){
+    public Institucion post(Institucion institucion){
         try(Connection conn = sql2o.open()){
             int insertId = (int) conn.createQuery(
-                    "INSERT INTO institution (institution) values  (:institutionName)",true)
-                    .addParameter("institutionName",institution.getInstitution())
+                    "INSERT INTO institucion (nombre, descrip) values  (:institutionName, :institutionDescrip)",true)
+                    .addParameter("institutionName", institucion.getNombre())
+                    .addParameter("institutionDescrip", institucion.getDescrip())
                     .executeUpdate()
                     .getKey();
-            institution.setId_institution(insertId);
-            return institution;
+            institucion.setId(insertId);
+            return institucion;
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
         }
     }
     @Override
-    public Institution put(int id, Institution institution){
+    public Institucion put(int id, Institucion institucion){
 
-        final String query = "UPDATE institution SET institution = :name WHERE institution.id_institution = :id";
+        final String query = "UPDATE institucion SET nombre = :nombre, descrip = :descrip  WHERE institucion.id = :id";
 
         try(Connection conn = sql2o.open()){
             int insertId = (int) conn.createQuery(query)
-                    .addParameter("name",institution.getInstitution())
+                    .addParameter("nombre", institucion.getNombre())
+                    .addParameter("descrip", institucion.getDescrip())
                     .addParameter("id",id)
                     .executeUpdate()
                     .getKey();
-            institution.setId_institution(insertId);
-            return institution;
-
+            institucion.setId(insertId);
+            return institucion;
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -78,7 +80,7 @@ public class InstitutionRepositoryImp implements InstitutionRepository{
     @Override
     public int deleteAll(){
         try(Connection conn = sql2o.open()){
-            conn.createQuery("DELETE FROM institution")
+            conn.createQuery("DELETE FROM institucion")
                     .executeUpdate();
             return 1;
         }catch(Exception e){
@@ -95,14 +97,14 @@ public class InstitutionRepositoryImp implements InstitutionRepository{
     @Override
     public int deleteById(int id){
         try(Connection conn = sql2o.open()){
-            int result = conn.createQuery("DELETE FROM institution WHERE id_institution = :id")
+            conn.createQuery("DELETE FROM institution WHERE id_institution = :id")
                     .addParameter("id",id)
                     .executeUpdate()
                     .getResult();
-            return result;
+            return 1;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return -1;
+            return 0;
         }
     };
 }

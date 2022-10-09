@@ -48,7 +48,7 @@ public class Eme_habilidadRepositoryImp implements Eme_habilidadRepository{
                     .addParameter("Eme_habilidadId_habilidad", Eme_habilidad.getId_habilidad())
                     .executeUpdate()
                     .getKey();
-            Eme_habilidad.setId_Eme_habilidad(insertId);
+            Eme_habilidad.setId(insertId);
             return Eme_habilidad;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -68,7 +68,7 @@ public class Eme_habilidadRepositoryImp implements Eme_habilidadRepository{
                     .addParameter("id",id)
                     .executeUpdate()
                     .getKey();
-            Eme_habilidad.setId_Eme_habilidad(insertId);
+            Eme_habilidad.setId(insertId);
             return Eme_habilidad;
 
         }catch(Exception e){
@@ -111,5 +111,5 @@ public class Eme_habilidadRepositoryImp implements Eme_habilidadRepository{
             System.out.println(e.getMessage());
             return -1;
         }
-    };
+    }
 }

@@ -47,7 +47,7 @@ public class HabilidadRepositoryImp implements HabilidadRepository{
                     .addParameter("HabilidadDescrip", Habilidad.getDescrip())
                     .executeUpdate()
                     .getKey();
-            Habilidad.setId_Habilidad(insertId);
+            Habilidad.setId(insertId);
             return Habilidad;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -66,7 +66,7 @@ public class HabilidadRepositoryImp implements HabilidadRepository{
                     .addParameter("id",id)
                     .executeUpdate()
                     .getKey();
-            Habilidad.setId_Habilidad(insertId);
+            Habilidad.setId(insertId);
             return Habilidad;
 
         }catch(Exception e){

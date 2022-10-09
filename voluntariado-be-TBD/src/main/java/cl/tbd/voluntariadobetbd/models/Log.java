@@ -1,6 +1,8 @@
 package cl.tbd.voluntariadobetbd.models;
 import java.sql.Date;
 
+import java.sql.Date;
+
 public class Log {
     private Integer id;
     private Integer id_voluntario;

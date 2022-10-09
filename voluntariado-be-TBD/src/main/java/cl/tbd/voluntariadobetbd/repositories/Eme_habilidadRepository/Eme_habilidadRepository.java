@@ -10,3 +10,4 @@ public interface Eme_habilidadRepository {
     public Eme_habilidad put(int id, Eme_habilidad Eme_habilidad);
     public int deleteAll();
     public int deleteById(int id);
+}

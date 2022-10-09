@@ -36,18 +36,10 @@ import axios from "axios";
 export default {
     name : 'GetTasksByVolunteerPage',
     data: () => ({
-        tareas: []
+        tareas: [],
+        voluntario: []
     }),
     methods: {
-        getTasksByVolunteer(id){
-            axios.get("http://localhost:8081/voluntario/" + id)
-            .then(response => {
-                this.tareas = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        },
         aceptFunction(id){
             axios.put("http://localhost:8081/tareas/" + id, {
                 estado: "Aceptada"
@@ -64,6 +56,13 @@ export default {
                 console.log(response)
             })
         }
+    },
+    beforeCreate() {
+        axios.get("http://localhost:8081/voluntario/name/" + localStorage.getItem('name'))
+        .then(response => {
+            this.voluntario = response.data;
+            console.log(this.voluntario);
+        })
     }
 }
 </script>

@@ -24,18 +24,6 @@ public class TareaService {
         return taskRepository.getTareasByIdVoluntario(id_volunteer);
     }
 
-    @PatchMapping("/aceptar/{idtask}")
-    @ResponseBody
-    public int acceptTareaById(@PathVariable("idtask") int idtask){
-        return taskRepository.acceptTareaById(idtask);
-    }
-
-    @PatchMapping("/rechazar/{idtask}")
-    @ResponseBody
-    public int rejectTareaById(@PathVariable("idtask") int idtask){
-        return taskRepository.rejectTareaById(idtask);
-    }
-
     @GetMapping()
     public List<Tarea> getAll(){
         return this.taskRepository.getAllTareas();

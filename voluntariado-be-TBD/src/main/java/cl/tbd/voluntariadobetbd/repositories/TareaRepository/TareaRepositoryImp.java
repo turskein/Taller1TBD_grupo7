@@ -66,40 +66,6 @@ public class TareaRepositoryImp implements TareaRepository {
     }
 
     @Override
-    public int acceptTareaById(int idTarea){
-        String getIdacceptQuery = "SELECT estado_tarea.id, estado_tarea.descrip FROM estado_tarea WHERE estado_tarea.descrip = 'aceptado'";
-        String queryUpdate = "UPDATE tarea SET id_estado = :id_estado WHERE id = :id";
-        try(Connection conn = sql2o.open()){
-            int idRejected = conn.createQuery(getIdacceptQuery).executeAndFetchFirst(Estado_tarea.class).getId();
-            conn.createQuery(queryUpdate,true)
-                    .addParameter("id", idTarea)
-                    .addParameter("id_estado",idRejected)
-                    .executeUpdate();
-            return 1;
-        }catch(Exception e){
-            System.out.print(e.getMessage());
-            return 0;
-        }
-    }
-
-    @Override
-    public int rejectTareaById(int idTarea){
-        String getIdrejectQuery = "SELECT estado_tarea.id, estado_tarea.descrip FROM estado_tarea WHERE estado_tarea.descrip = 'rechazado'";
-        String queryUpdate = "UPDATE tarea SET id_estado = :id_estado WHERE id = :id";
-        try(Connection conn = sql2o.open()){
-            int idRejected = conn.createQuery(getIdrejectQuery).executeAndFetchFirst(Estado_tarea.class).getId();
-            conn.createQuery(queryUpdate,true)
-            .addParameter("id", idTarea)
-            .addParameter("id_estado",idRejected)
-            .executeUpdate();
-            return 1;
-        }catch(Exception e){
-            System.out.print(e.getMessage());
-            return 0;
-        }
-    }
-
-    @Override
     public int deleteById(int id){
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM tarea WHERE tarea.id = :id")

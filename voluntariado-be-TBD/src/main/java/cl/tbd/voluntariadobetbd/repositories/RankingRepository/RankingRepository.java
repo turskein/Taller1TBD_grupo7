@@ -10,4 +10,5 @@ public interface RankingRepository {
     public Ranking put(int id, Ranking Ranking);
     public int deleteAll();
     public int deleteById(int id);
+    public int updateStateTarea(int idvoluntario, int idTarea, int newState);
 }

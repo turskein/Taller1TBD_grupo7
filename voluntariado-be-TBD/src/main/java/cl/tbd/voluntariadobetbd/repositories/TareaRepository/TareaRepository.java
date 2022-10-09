@@ -7,9 +7,6 @@ import cl.tbd.voluntariadobetbd.models.Tarea;
 
 public interface TareaRepository {
     public List<Tarea> getTareasByIdVoluntario(int idVolunteer);
-    public int acceptTareaById(int idTarea);
-    public int rejectTareaById(int idTarea);
-
     // CRUD
     public List<Tarea> getAllTareas();
     public Tarea getTareaById(int id);

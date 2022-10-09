@@ -28,6 +28,10 @@ public class RankingService {
         return this.rankingRepository.getAll();
     }
 
+    @PatchMapping()
+    public int updateStateTarea(@RequestParam Integer id_tarea, @RequestParam Integer id_voluntario, @RequestParam Integer nuevo_estado){
+        return rankingRepository.updateStateTarea(id_voluntario,id_tarea,nuevo_estado);
+    }
 
     @PostMapping()
     @ResponseBody

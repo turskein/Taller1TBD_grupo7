@@ -1,5 +1,6 @@
 package cl.tbd.voluntariadobetbd.repositories.RankingRepository;
 
+import cl.tbd.voluntariadobetbd.models.Estado_tarea;
 import cl.tbd.voluntariadobetbd.models.Ranking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -80,6 +81,22 @@ public class RankingRepositoryImp implements RankingRepository{
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    @Override
+    public int updateStateTarea(int idvoluntario, int idTarea, int newState){
+        String queryUpdate = "UPDATE ranking SET flg_participa = :id_participa WHERE id_voluntario = :id_voluntario AND id_tarea = :id_tarea";
+        try(Connection conn = sql2o.open()){
+            conn.createQuery(queryUpdate,true)
+                    .addParameter("id_tarea", idTarea)
+                    .addParameter("id_participa",newState)
+                    .addParameter("id_voluntario",idvoluntario)
+                    .executeUpdate();
+            return 1;
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            return 0;
         }
     }
 

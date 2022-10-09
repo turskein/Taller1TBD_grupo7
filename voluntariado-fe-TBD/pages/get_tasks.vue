@@ -7,22 +7,27 @@
                         Tareas asignadas
                     </th>
                     <th class="text-left">
+                        Estado
+                    </th>
+                    <th class="text-left">
                     </th>
                     <th class="text-left">
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="tarea in tareas" :key="tarea.id" v-bind:id="'tarea_'+tarea.id">
-                    <td>{{ tarea.nombre }}
+                <tr v-for="tarea in tareas" :key="tarea.id" v-bind:id="'tarea_'+tarea.id" v-if="tarea.id_estado == 0">
+                    <td>{{ tarea.nombre }}</td>
+                    <td>
+                        Pendiente
                     </td>
                     <td>
-                        <v-btn depressed color="primary" @click="aceptFunction(tarea.id)">
+                        <v-btn depressed color="primary" @click="aceptFunction(tarea.id)" href="http://localhost:3000/get_tasks">
                             Aceptar
                         </v-btn>
                     </td>
                     <td>
-                        <v-btn depressed color="error" @click="rejectFunction(tarea.id)">
+                        <v-btn depressed color="error" @click="rejectFunction(tarea.id)" href="http://localhost:3000/get_tasks">
                             Rechazar
                         </v-btn>
                     </td>
@@ -43,17 +48,13 @@ export default {
     }),
     methods: {
         aceptFunction(id){
-            axios.put("http://localhost:8081/tarea/" + id, {
-                estado: "Aceptada"
-            })
+            axios.patch("http://localhost:8081/tarea/aceptar/" + id)
             .then(response => {
                 console.log(response)
             })
         },
         rejectFunction(id){
-            axios.put("http://localhost:8081/tarea/" + id, {
-                estado: "Rechazada"
-            })
+            axios.patch("http://localhost:8081/tarea/rechazar/" + id)
             .then(response => {
                 console.log(response)
             })

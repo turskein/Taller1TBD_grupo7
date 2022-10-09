@@ -1,11 +1,12 @@
 package cl.tbd.voluntariadobetbd.models;
 
-public class Log {
+public class Ranking {
     private Integer id;
     private Integer id_voluntario;
     private Integer id_tarea;
-    private String accion;
-    private Date fecha;
+    private Integer puntaje;
+    private Integer flg_invitado;
+    private Integer flg_participa;
 
     public Integer getId() {
         return id;
@@ -31,19 +32,27 @@ public class Log {
         this.id_tarea = id_tarea;
     }
 
-    public String getAccion() {
-        return accion;
+    public Integer getPuntaje() {
+        return puntaje;
     }
 
-    public void setAccion(String accion) {
-        this.accion = accion;
+    public void setPuntaje(Integer puntaje) {
+        this.puntaje = puntaje;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Integer getFlg_invitado() {
+        return flg_invitado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFlg_invitado(Integer flg_invitado) {
+        this.flg_invitado = flg_invitado;
+    }
+
+    public Integer getFlg_participa() {
+        return flg_participa;
+    }
+
+    public void setFlg_participa(Integer flg_participa) {
+        this.flg_participa = flg_participa;
     }
 }

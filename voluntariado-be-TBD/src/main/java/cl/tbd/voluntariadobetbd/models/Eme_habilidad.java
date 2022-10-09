@@ -1,6 +1,6 @@
 package cl.tbd.voluntariadobetbd.models;
 
-public class Institution {
+public class Eme_habilidad {
     private Integer id;
     private Integer id_emergencia;
     private Integer id_habilidad;

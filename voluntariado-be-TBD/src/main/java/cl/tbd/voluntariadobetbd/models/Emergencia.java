@@ -1,6 +1,6 @@
 package cl.tbd.voluntariadobetbd.models;
 
-public class Institution {
+public class Emergencia {
     private Integer id;
     private String nombre;
     private String descrip;

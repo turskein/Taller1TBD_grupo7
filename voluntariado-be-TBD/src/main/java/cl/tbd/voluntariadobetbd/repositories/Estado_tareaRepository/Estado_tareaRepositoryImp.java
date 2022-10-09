@@ -2,15 +2,18 @@ package cl.tbd.voluntariadobetbd.repositories.Estado_tareaRepository;
 
 import cl.tbd.voluntariadobetbd.models.Estado_tarea;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
 
-public class Estado_tareaImp implements Estado_tareaRepository{
+@Repository
+public class Estado_tareaRepositoryImp implements Estado_tareaRepository {
     @Autowired
     private Sql2o sql2o;
 
+    @Override
     public List<Estado_tarea> getAll(){
         try(Connection conn = sql2o.open()){
             return conn.createQuery("SELECT * FROM estado_tarea").executeAndFetch(Estado_tarea.class);

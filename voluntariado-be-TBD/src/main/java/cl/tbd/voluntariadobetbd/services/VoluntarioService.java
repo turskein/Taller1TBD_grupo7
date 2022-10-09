@@ -11,16 +11,11 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/volunteers")
+@RequestMapping("/voluntario")
 public class VoluntarioService {
     private final VoluntarioRepository voluntarioRepository;
     VoluntarioService(VoluntarioRepository voluntarioRepository){
         this.voluntarioRepository = voluntarioRepository;
-    }
-
-    @GetMapping()
-    public Voluntario getByName(@RequestParam String name){
-        return voluntarioRepository.getByName(name);
     }
 
     @GetMapping("/{id}")

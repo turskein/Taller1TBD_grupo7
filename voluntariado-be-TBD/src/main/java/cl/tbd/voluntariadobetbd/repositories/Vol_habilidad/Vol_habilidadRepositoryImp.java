@@ -2,11 +2,13 @@ package cl.tbd.voluntariadobetbd.repositories.Vol_habilidad;
 
 import cl.tbd.voluntariadobetbd.models.Vol_habilidad;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
 
+@Repository
 public class Vol_habilidadRepositoryImp implements Vol_habilidadRepository{
 
     @Autowired

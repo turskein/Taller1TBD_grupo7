@@ -19,14 +19,12 @@ public class TareaService {
         this.taskRepository = tareaRepository;
     }
 
-    @GetMapping()
-    public List<Tarea> getTasksByIdVolunteer(@RequestParam(name = "id_volunteer") int id_volunteer){
+    @GetMapping("/voluntario/{id}")
+    public List<Tarea> getTasksByIdVolunteer(@PathVariable("id") int id_volunteer){
         return taskRepository.getTareasByIdVoluntario(id_volunteer);
     }
 
-    @GetMapping("/{id}")
-
-    @PutMapping("/{idtask}")
+    @PatchMapping("/{idtask}")
     @ResponseBody
     public int putNewStatus(@PathVariable("idtask") int idtask, @RequestParam() String newStatus){
         return taskRepository.updateTareaById(idtask, newStatus);

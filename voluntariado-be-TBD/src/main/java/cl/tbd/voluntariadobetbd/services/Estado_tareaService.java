@@ -15,7 +15,7 @@ import java.util.Map;
 public class Estado_tareaService {
     private final Estado_tareaRepository estado_tareaRepository;
 
-    Estado_tareaService(Estado_tareaRepository habilidadRepository){ this.estado_tareaRepository = habilidadRepository; }
+    Estado_tareaService(Estado_tareaRepository estado_tareaRepository){ this.estado_tareaRepository = estado_tareaRepository; }
 
     @GetMapping()
     public List<Estado_tarea> getAll(){

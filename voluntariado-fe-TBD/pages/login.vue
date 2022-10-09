@@ -34,7 +34,7 @@ export default {
                     localStorage.setItem('id',response.data.id);
                 })  
             localStorage.setItem('name', this.form.name)
-            console.log(localStorage.getItem('name'))
+            console.log(localStorage.getItem('id'))
         }
     }
 }

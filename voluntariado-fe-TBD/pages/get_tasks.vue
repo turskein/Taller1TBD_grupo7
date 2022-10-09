@@ -22,12 +22,14 @@
                         Pendiente
                     </td>
                     <td>
-                        <v-btn depressed color="primary" @click="aceptFunction(tarea.id)" href="http://localhost:3000/get_tasks">
+                        <v-btn depressed color="primary" @click="aceptFunction(tarea.id)"
+                            href="http://localhost:3000/get_tasks">
                             Aceptar
                         </v-btn>
                     </td>
                     <td>
-                        <v-btn depressed color="error" @click="rejectFunction(tarea.id)" href="http://localhost:3000/get_tasks">
+                        <v-btn depressed color="error" @click="rejectFunction(tarea.id)"
+                            href="http://localhost:3000/get_tasks">
                             Rechazar
                         </v-btn>
                     </td>
@@ -40,32 +42,33 @@
 <script>
 import axios from "axios";
 export default {
-    name : 'GetTasksByVolunteerPage',
+    name: 'GetTasksByVolunteerPage',
     data: () => ({
-    voluntario: '',
-    tareas: [],
-    id: ''
+        voluntario: '',
+        tareas: [],
+        id: ''
     }),
     methods: {
-        aceptFunction(id){
-            axios.patch("http://localhost:8081/tarea/aceptar/" + id)
-            .then(response => {
-                console.log(response)
-            })
+        aceptFunction(id) {
+            axios.patch("http://localhost:8081/ranking?" + "id_voluntario=" + localStorage.getItem('id') + "&id_tarea=" + id + "&nuevo_estado=2")
+                .then(response => {
+                    console.log(response)
+                    console.log(localStorage.getItem('id'))
+                })
         },
-        rejectFunction(id){
-            axios.patch("http://localhost:8081/tarea/rechazar/" + id)
-            .then(response => {
-                console.log(response)
-            })
+        rejectFunction(id) {
+            axios.patch("http://localhost:8081/ranking?" + "id_voluntario=" + localStorage.getItem('id') + "&id_tarea=" + id + "&nuevo_estado=3")
+                .then(response => {
+                    console.log(response)
+                })
         }
     },
     beforeCreate() {
         axios.get("http://localhost:8081/tarea/voluntario/" + localStorage.getItem('id'))
-        .then(response => {
-            console.log(localStorage.getItem('id'));
-            this.tareas = response.data;
-        })
+            .then(response => {
+                console.log(localStorage.getItem('id'));
+                this.tareas = response.data;
+            })
     }
 }
 </script>

@@ -11,6 +11,8 @@ public class Tarea {
     private int id_emergencia;
     private Date finicio;
     private Date ffin;
+
+    private int id_estado;
     public int getId(){
         return this.id;
     }
@@ -58,5 +60,13 @@ public class Tarea {
     }
     public void setFfin(Date ffin) {
         this.ffin = ffin;
+    }
+
+    public int getId_estado() {
+        return id_estado;
+    }
+
+    public void setId_estado(int id_estado) {
+        this.id_estado = id_estado;
     }
 }

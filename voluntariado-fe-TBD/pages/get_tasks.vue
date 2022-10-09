@@ -13,15 +13,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="tarea in tareas" :key="tarea.id_tarea" v-bind:id="'tarea_'+tarea.id_tarea">
-                    <td>{{ tarea.tarea }}</td>
+                <tr v-for="tarea in tareas" :key="tarea.id" v-bind:id="'tarea_'+tarea.id">
+                    <td>{{ tarea.nombre }}
+                    </td>
                     <td>
-                        <v-btn depressed color="primary" @click="aceptFunction(tarea.id_tarea)">
+                        <v-btn depressed color="primary" @click="aceptFunction(tarea.id)">
                             Aceptar
                         </v-btn>
                     </td>
                     <td>
-                        <v-btn depressed color="error" @click="rejectFunction(tarea.id_tarea)">
+                        <v-btn depressed color="error" @click="rejectFunction(tarea.id)">
                             Rechazar
                         </v-btn>
                     </td>
@@ -36,8 +37,9 @@ import axios from "axios";
 export default {
     name : 'GetTasksByVolunteerPage',
     data: () => ({
-        tareas: [],
-        voluntario: []
+    voluntario: '',
+    tareas: [],
+    id: ''
     }),
     methods: {
         aceptFunction(id){
@@ -61,8 +63,13 @@ export default {
         axios.get("http://localhost:8081/voluntario/name/" + localStorage.getItem('name'))
         .then(response => {
             this.voluntario = response.data;
+            this.id = this.voluntario.id;
             console.log(this.voluntario);
-        })
+
+        })   
+    },
+    created() {
+        console.log(this.id, "id");
     }
 }
 </script>

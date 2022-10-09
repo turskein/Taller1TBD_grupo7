@@ -43,7 +43,7 @@ export default {
     }),
     methods: {
         aceptFunction(id){
-            axios.put("http://localhost:8081/tareas/" + id, {
+            axios.put("http://localhost:8081/tarea/" + id, {
                 estado: "Aceptada"
             })
             .then(response => {
@@ -51,7 +51,7 @@ export default {
             })
         },
         rejectFunction(id){
-            axios.put("http://localhost:8081/tareas/" + id, {
+            axios.put("http://localhost:8081/tarea/" + id, {
                 estado: "Rechazada"
             })
             .then(response => {
@@ -60,16 +60,11 @@ export default {
         }
     },
     beforeCreate() {
-        axios.get("http://localhost:8081/voluntario/name/" + localStorage.getItem('name'))
+        axios.get("http://localhost:8081/tarea/voluntario/" + localStorage.getItem('id'))
         .then(response => {
-            this.voluntario = response.data;
-            this.id = this.voluntario.id;
-            console.log(this.voluntario);
-
-        })   
-    },
-    created() {
-        console.log(this.id, "id");
+            console.log(localStorage.getItem('id'));
+            this.tareas = response.data;
+        })
     }
 }
 </script>

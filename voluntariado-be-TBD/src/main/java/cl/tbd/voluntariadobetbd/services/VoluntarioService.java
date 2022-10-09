@@ -19,7 +19,7 @@ public class VoluntarioService {
     }
 
     @GetMapping("/name/{name}")
-    public Voluntario getById(@PathVariable("name") String name){
+    public Voluntario getByName(@PathVariable("name") String name){
         return voluntarioRepository.getByName(name);
     }
     @GetMapping("/{id}")

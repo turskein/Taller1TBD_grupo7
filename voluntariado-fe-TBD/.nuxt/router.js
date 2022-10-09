@@ -4,10 +4,13 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _b90fb770 = () => interopDefault(import('..\\pages\\get.vue' /* webpackChunkName: "pages/get" */))
-const _662b68cc = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _ca4478fe = () => interopDefault(import('..\\pages\\put.vue' /* webpackChunkName: "pages/put" */))
-const _f6329d78 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _632a810a = () => interopDefault(import('..\\pages\\get.vue' /* webpackChunkName: "pages/get" */))
+const _0e0b6299 = () => interopDefault(import('..\\pages\\get_tasks.vue' /* webpackChunkName: "pages/get_tasks" */))
+const _17fd948e = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _29c6eec6 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _87d936c8 = () => interopDefault(import('..\\pages\\post.vue' /* webpackChunkName: "pages/post" */))
+const _5a902043 = () => interopDefault(import('..\\pages\\put.vue' /* webpackChunkName: "pages/put" */))
+const _2174e586 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -22,19 +25,31 @@ export const routerOptions = {
 
   routes: [{
     path: "/get",
-    component: _b90fb770,
+    component: _632a810a,
     name: "get"
   }, {
+    path: "/get_tasks",
+    component: _0e0b6299,
+    name: "get_tasks"
+  }, {
     path: "/inspire",
-    component: _662b68cc,
+    component: _17fd948e,
     name: "inspire"
   }, {
+    path: "/login",
+    component: _29c6eec6,
+    name: "login"
+  }, {
+    path: "/post",
+    component: _87d936c8,
+    name: "post"
+  }, {
     path: "/put",
-    component: _ca4478fe,
+    component: _5a902043,
     name: "put"
   }, {
     path: "/",
-    component: _f6329d78,
+    component: _2174e586,
     name: "index"
   }],
 

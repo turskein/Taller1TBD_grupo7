@@ -2,29 +2,50 @@
   {
     "name": "get",
     "path": "/get",
-    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\get.vue",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\get.vue",
     "chunkName": "pages/get",
-    "_name": "_b90fb770"
+    "_name": "_632a810a"
+  },
+  {
+    "name": "get_tasks",
+    "path": "/get_tasks",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\get_tasks.vue",
+    "chunkName": "pages/get_tasks",
+    "_name": "_0e0b6299"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\inspire.vue",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire",
-    "_name": "_662b68cc"
+    "_name": "_17fd948e"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\login.vue",
+    "chunkName": "pages/login",
+    "_name": "_29c6eec6"
+  },
+  {
+    "name": "post",
+    "path": "/post",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\post.vue",
+    "chunkName": "pages/post",
+    "_name": "_87d936c8"
   },
   {
     "name": "put",
     "path": "/put",
-    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\put.vue",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\put.vue",
     "chunkName": "pages/put",
-    "_name": "_ca4478fe"
+    "_name": "_5a902043"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\cata\\\\Desktop\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\Alex\\\\Desktop\\\\usach\\\\Semestre 6\\\\Taller de Base de Datos\\\\Lab\\\\voluntariado-TBD\\\\voluntariado-fe-TBD\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_f6329d78"
+    "_name": "_2174e586"
   }
 ]

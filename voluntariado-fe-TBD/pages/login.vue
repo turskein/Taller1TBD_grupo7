@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     data() {
         return {
@@ -28,6 +29,10 @@ export default {
     },
     methods: {
         saveName() {
+            axios.get("http://localhost:8081/voluntario/name/" + localStorage.getItem('name'))
+                .then(response => {
+                    localStorage.setItem('id',response.data.id);
+                })  
             localStorage.setItem('name', this.form.name)
             console.log(localStorage.getItem('name'))
         }

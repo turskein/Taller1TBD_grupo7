@@ -51,8 +51,8 @@ public class TareaRepositoryImp implements TareaRepository {
                         "tarea.cant_vol_inscritos, " +
                         "tarea.id_emergencia, " +
                         "tarea.finicio, " +
-                        "tarea.ffinal, " +
-                        "FROM  tarea, log WHERE :id_voluntario = log.id_voluntario AND log.id_tarea = tarea.id";
+                        "tarea.ffin " +
+                        "FROM  tarea, ranking WHERE :id_voluntario = ranking.id_voluntario AND ranking.id_tarea = tarea.id";
         try(Connection conn = sql2o.open()){
             return conn.createQuery(query)
             .addParameter("id_voluntario", idVoluntario)

@@ -18,13 +18,13 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE voluntariadotbd;
+DROP DATABASE IF EXISTS voluntariadotbd;
 --
 -- TOC entry 3667 (class 1262 OID 25530)
 -- Name: voluntariadotbd; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE voluntariadotbd WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'C';
+CREATE DATABASE voluntariadotbd WITH TEMPLATE = template0 ENCODING = 'UTF8';
 
 
 ALTER DATABASE voluntariadotbd OWNER TO postgres;
@@ -51,19 +51,19 @@ CREATE FUNCTION public.process_log() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
     BEGIN
-        IF (TG_OP = 'DELETE') THEN
-            INSERT INTO public.log (id_voluntario, id_tarea, accion, fecha)
-                SELECT o.id_voluntario, o.id_tarea, 'terminar', now() FROM old_table o;
-        ELSIF (TG_OP = 'UPDATE') THEN
-			IF(new.flg_participa = 0) THEN
+        IF (TG_OP = 'UPDATE') THEN
+			IF(new.flg_participa = 1) THEN
             	INSERT INTO public.log (id_voluntario, id_tarea, accion, fecha)
                 	SELECT new.id_voluntario, new.id_tarea, 'cancelar', now();
-			ELSIF(new.flg_participa = 1) THEN
-				INSERT INTO public.log (id_voluntario, id_tarea, accion, fecha)
-					SELECT new.id_voluntario, new.id_tarea, 'aceptar', now();
 			ELSIF(new.flg_participa = 2) THEN
 				INSERT INTO public.log (id_voluntario, id_tarea, accion, fecha)
+					SELECT new.id_voluntario, new.id_tarea, 'aceptar', now();
+			ELSIF(new.flg_participa = 3) THEN
+				INSERT INTO public.log (id_voluntario, id_tarea, accion, fecha)
 					SELECT new.id_voluntario, new.id_tarea, 'rechazar', now();
+			ELSIF(new.flg_participa = 4) THEN
+				INSERT INTO public.log (id_voluntario, id_tarea, accion, fecha)
+					SELECT new.id_voluntario, new.id_tarea, 'terminar', now();
 			END IF;
 		END IF;
         RETURN NULL; -- result is ignored since this is an AFTER trigger
@@ -83,13 +83,22 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.eme_habilidad (
-    id numeric(8,0) NOT NULL,
-    id_emergencia numeric(6,0),
-    id_habilidad numeric(4,0)
+    id integer NOT NULL,
+    id_emergencia integer,
+    id_habilidad integer
 );
 
 
 ALTER TABLE public.eme_habilidad OWNER TO postgres;
+
+ALTER TABLE public.eme_habilidad ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.eme_habilidad_id_seq
+    START WITH 20
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 210 (class 1259 OID 25534)
@@ -97,16 +106,25 @@ ALTER TABLE public.eme_habilidad OWNER TO postgres;
 --
 
 CREATE TABLE public.emergencia (
-    id numeric(6,0) NOT NULL,
+    id integer NOT NULL,
     nombre character varying(100),
     descrip character varying(400),
     finicio date,
     ffin date,
-    id_institucion numeric(4,0)
+    id_institucion integer
 );
 
 
 ALTER TABLE public.emergencia OWNER TO postgres;
+
+ALTER TABLE public.emergencia ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.emergencia_id_seq
+    START WITH 6
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 211 (class 1259 OID 25539)
@@ -114,12 +132,21 @@ ALTER TABLE public.emergencia OWNER TO postgres;
 --
 
 CREATE TABLE public.estado_tarea (
-    id numeric(2,0) NOT NULL,
+    id integer NOT NULL,
     descrip character varying(20)
 );
 
 
 ALTER TABLE public.estado_tarea OWNER TO postgres;
+
+ALTER TABLE public.estado_tarea ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.estado_tarea_id_seq
+    START WITH 4
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 212 (class 1259 OID 25542)
@@ -127,12 +154,21 @@ ALTER TABLE public.estado_tarea OWNER TO postgres;
 --
 
 CREATE TABLE public.habilidad (
-    id numeric(4,0) NOT NULL,
+    id integer NOT NULL,
     descrip character varying(100)
 );
 
 
 ALTER TABLE public.habilidad OWNER TO postgres;
+
+ALTER TABLE public.habilidad ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.habilidad_id_seq
+    START WITH 20
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 213 (class 1259 OID 25545)
@@ -140,13 +176,22 @@ ALTER TABLE public.habilidad OWNER TO postgres;
 --
 
 CREATE TABLE public.institucion (
-    id numeric(4,0) NOT NULL,
+    id integer NOT NULL,
     nombre character varying(100),
     descrip character varying(400)
 );
 
 
 ALTER TABLE public.institucion OWNER TO postgres;
+
+ALTER TABLE public.institucion ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.institucion_id_seq
+    START WITH 6
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 220 (class 1259 OID 25641)
@@ -171,7 +216,7 @@ ALTER TABLE public.log OWNER TO postgres;
 
 ALTER TABLE public.log ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
     SEQUENCE NAME public.log_id_seq
-    START WITH 1
+    START WITH 7
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -185,16 +230,25 @@ ALTER TABLE public.log ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 --
 
 CREATE TABLE public.ranking (
-    id numeric(8,0) NOT NULL,
-    id_voluntario numeric(8,0),
-    id_tarea numeric(8,0),
-    puntaje numeric(3,0),
-    flg_invitado numeric(1,0),
-    flg_participa numeric(1,0)
+    id integer NOT NULL,
+    id_voluntario integer,
+    id_tarea integer,
+    puntaje integer,
+    flg_invitado integer,
+    flg_participa integer
 );
 
 
 ALTER TABLE public.ranking OWNER TO postgres;
+
+ALTER TABLE public.ranking ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.ranking_id_seq
+    START WITH 2000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 3668 (class 0 OID 0)
@@ -211,19 +265,28 @@ COMMENT ON TABLE public.ranking IS 'los flgInvitado, flgParticipa 1 si la respue
 --
 
 CREATE TABLE public.tarea (
-    id numeric(8,0) NOT NULL,
+    id integer NOT NULL,
     nombre character varying(60),
     descrip character varying(300),
-    cant_vol_requeridos numeric(4,0),
-    cant_vol_inscritos numeric(4,0),
-    id_emergencia numeric(6,0),
+    cant_vol_requeridos integer,
+    cant_vol_inscritos integer,
+    id_emergencia integer,
     finicio date,
     ffin date,
-    id_estado numeric(2,0)
+    id_estado integer
 );
 
 
 ALTER TABLE public.tarea OWNER TO postgres;
+
+ALTER TABLE public.tarea ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.tarea_id_seq
+    START WITH 200
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 216 (class 1259 OID 25556)
@@ -231,13 +294,22 @@ ALTER TABLE public.tarea OWNER TO postgres;
 --
 
 CREATE TABLE public.tarea_habilidad (
-    id numeric(8,0) NOT NULL,
-    id_emehab numeric(8,0),
-    id_tarea numeric(8,0)
+    id integer NOT NULL,
+    id_emehab integer,
+    id_tarea integer
 );
 
 
 ALTER TABLE public.tarea_habilidad OWNER TO postgres;
+
+ALTER TABLE public.tarea_habilidad ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.tarea_habilidad_id_seq
+    START WITH 200
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 217 (class 1259 OID 25559)
@@ -245,13 +317,22 @@ ALTER TABLE public.tarea_habilidad OWNER TO postgres;
 --
 
 CREATE TABLE public.vol_habilidad (
-    id numeric(8,0) NOT NULL,
-    id_voluntario numeric(8,0),
-    id_habilidad numeric(8,0)
+    id integer NOT NULL,
+    id_voluntario integer,
+    id_habilidad integer
 );
 
 
 ALTER TABLE public.vol_habilidad OWNER TO postgres;
+
+ALTER TABLE public.vol_habilidad ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.vol_habilidad_id_seq
+    START WITH 21000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 218 (class 1259 OID 25562)
@@ -259,13 +340,22 @@ ALTER TABLE public.vol_habilidad OWNER TO postgres;
 --
 
 CREATE TABLE public.voluntario (
-    id numeric(8,0) NOT NULL,
+    id integer NOT NULL,
     nombre character varying(100),
     fnacimiento date
 );
 
 
 ALTER TABLE public.voluntario OWNER TO postgres;
+
+ALTER TABLE public.voluntario ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.voluntario_id_seq
+    START WITH 1100
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 --
 -- TOC entry 3650 (class 0 OID 25531)
@@ -320,10 +410,10 @@ COPY public.emergencia (id, nombre, descrip, finicio, ffin, id_institucion) FROM
 --
 
 COPY public.estado_tarea (id, descrip) FROM stdin;
-0	estado_0
-1	estado_1
-2	estado_2
-3	estado_3
+0	pendiente
+1	aceptado
+2	rechazado
+3	jajaxd
 \.
 
 
@@ -380,12 +470,6 @@ COPY public.institucion (id, nombre, descrip) FROM stdin;
 --
 
 COPY public.log (id, id_voluntario, id_tarea, accion, fecha) FROM stdin;
-11984069	866	55	terminar	2022-10-02
-1	213	97	rechazar	2022-10-02
-2	213	97	aceptar	2022-10-02
-3	741	92	aceptar	2022-10-08
-4	741	92	rechazar	2022-10-08
-5	741	92	cancelar	2022-10-08
 \.
 
 
@@ -23844,14 +23928,6 @@ ALTER TABLE ONLY public.vol_habilidad
 
 ALTER TABLE ONLY public.voluntario
     ADD CONSTRAINT voluntario_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 3509 (class 2620 OID 25711)
--- Name: ranking ranking_delete; Type: TRIGGER; Schema: public; Owner: postgres
---
-
-CREATE TRIGGER ranking_delete AFTER DELETE ON public.ranking REFERENCING OLD TABLE AS old_table FOR EACH ROW EXECUTE FUNCTION public.process_log();
 
 
 --

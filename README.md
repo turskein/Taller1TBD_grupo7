@@ -17,10 +17,11 @@ Recordar que:
 Al ejecutar estos comandos se debe posteriormente introducir la contraseña del usuario ingresado y con eso la base de datos estará lista para ser usada.
 
 Otro cambio necesario es la conexión de la aplicación de Spring con la base de datos montada previamente. Para ello, basta con modificar el archivo de laa siguiente ruta: "voluntariado-be-TBD/src/main/resources/application.properties", donde ingresaremos las credenciales correspondientes a la base de datos creada. Debería ser algo similar a:
-database.url=jdbc:postgresql://localhost:5432/voluntariadotbd
-database.user=postgres
-database.password=postgres
-server.port=8081
+- database.url=jdbc:postgresql://localhost:5432/voluntariadotbd
+- database.user=postgres
+- database.password=postgres
+- server.port=8081
+
 *Recordar que el puerto 8081 debe estar libre y el servidor de postgres debe coincidir (por defecto el 5432).
 
 # Frontend:

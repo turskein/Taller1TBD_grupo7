@@ -10,6 +10,7 @@ Con lo anterior instalado y con la configuración estándar, es necesario cargar
 El único requisito es tener agregado a las variables de entorno "path" la carpeta "bin" de PostgreSQL 14.
 Posteriormente, descargar el archivo "voluntariadotbd.sql" y abrir una terminal en su ubicación. Luego ejecutar el siguiente comando:
 - psql -U postgres -f voluntariadotbd.sql
+
 Recordar que:
 - -U: usuario de postgres donde "postgres" es el usuario por defecto.
 - -f: archivo a restaurar.

@@ -7,20 +7,14 @@
                         Tareas asignadas
                     </th>
                     <th class="text-left">
-                        Estado
-                    </th>
-                    <th class="text-left">
                     </th>
                     <th class="text-left">
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="tarea in tareas" :key="tarea.id" v-bind:id="'tarea_'+tarea.id" v-if="tarea.id_estado == 0">
+                <tr v-for="tarea in tareas" :key="tarea.id" v-bind:id="'tarea_'+tarea.id">
                     <td>{{ tarea.nombre }}</td>
-                    <td>
-                        Pendiente
-                    </td>
                     <td>
                         <v-btn depressed color="primary" @click="aceptFunction(tarea.id)"
                             href="http://localhost:3000/get_tasks">
@@ -53,7 +47,6 @@ export default {
             axios.patch("http://localhost:8081/ranking?" + "id_voluntario=" + localStorage.getItem('id') + "&id_tarea=" + id + "&nuevo_estado=2")
                 .then(response => {
                     console.log(response)
-                    console.log(localStorage.getItem('id'))
                 })
         },
         rejectFunction(id) {
@@ -66,8 +59,8 @@ export default {
     beforeCreate() {
         axios.get("http://localhost:8081/tarea/voluntario/" + localStorage.getItem('id'))
             .then(response => {
-                console.log(localStorage.getItem('id'));
                 this.tareas = response.data;
+                console.log(localStorage.getItem('access_token'))
             })
     }
 }

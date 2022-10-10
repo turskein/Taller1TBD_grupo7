@@ -10,7 +10,7 @@
             <v-text-field v-model="form.name" outlined :counter="25" />
         </v-card-text>
         <v-card-actions>
-            <v-btn color="primary" depressed v-on:click='saveName()' href="http://localhost:3000/get_tasks">
+            <v-btn color="primary" depressed v-on:click='saveName()'>
                 Iniciar sesión
             </v-btn>
         </v-card-actions>
@@ -32,9 +32,9 @@ export default {
             axios.get("http://localhost:8081/voluntario/name/" + localStorage.getItem('name'))
                 .then(response => {
                     localStorage.setItem('id',response.data.id);
+                    window.location.href = "http://localhost:3000/loading_view"
                 })  
             localStorage.setItem('name', this.form.name)
-            console.log(localStorage.getItem('id'))
         }
     }
 }
